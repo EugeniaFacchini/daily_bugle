@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:daily_bugle/widgets/home.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -14,6 +14,6 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(primarySwatch: Colors.cyan),
         title: 'Daily Bugle',
-        home: Home());
+        home: const Home());
   }
 }

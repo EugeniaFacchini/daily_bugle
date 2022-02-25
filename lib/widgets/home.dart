@@ -1,7 +1,6 @@
-import 'dart:convert';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+
+import 'package:daily_bugle/widgets/dropdown_regione.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -18,17 +17,11 @@ class _HomeState extends State<Home> {
         title: Text('Daily Bugle'),
         centerTitle: true,
       ),
-      body: Center(
-        child: Container(
-          child: DropdownButton(
-            items: [
-              DropdownMenuItem(
-                  child: Text("Emilia Romagna")),
-                  DropdownMenuItem(child: Text("Trentino Alto Adige"))],
-            onChanged: null,
-          ),
+       body: Center(
+         child: Container(
+          child: DropDownRegion() ,
         ),
-      ),
+       ),
     );
   }
 }
