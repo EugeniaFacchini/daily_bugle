@@ -6,7 +6,7 @@ class DropDownRegion extends StatefulWidget {
 }
 
 class _DropDownDemoState extends State<DropDownRegion> {
-  String _chosenValue = "";
+  String? _chosenValue = "";
   var A = [
     "",
     'Abruzzo',
@@ -42,6 +42,9 @@ class _DropDownDemoState extends State<DropDownRegion> {
         //elevation: 5,
         style: TextStyle(color: Colors.black),
         items: A,
-        onChanged: (str) {});
+        onChanged: (String? value) {
+              setState(() {
+                _chosenValue = value;
+              });});
   }
 }
