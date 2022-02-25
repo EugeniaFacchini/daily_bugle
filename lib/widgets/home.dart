@@ -10,6 +10,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  String? _regione="";
+  String? _provincia="";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +21,10 @@ class _HomeState extends State<Home> {
       ),
       body: Center(
         child: Container(
-          child: DropDownRegion(),
+          child: DropDownRegion(onChange: (String? str){
+              setState(() {
+                _regione = str;
+              });},),
         ),
       ),
     );

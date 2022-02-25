@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class DropDownRegion extends StatefulWidget {
+  const DropDownRegion({Key? key, required this.onChange}) : super(key: key);
+  final void Function(String? str) onChange;
   @override
   _DropDownDemoState createState() => _DropDownDemoState();
 }
@@ -42,9 +44,10 @@ class _DropDownDemoState extends State<DropDownRegion> {
         //elevation: 5,
         style: TextStyle(color: Colors.black),
         items: A,
-        onChanged: (String? value) {
-              setState(() {
-                _chosenValue = value;
-              });});
+        onChanged: (String? str){setState(() {
+          _chosenValue = str;
+          widget.onChange(str);
+        });}
+        );
   }
 }
