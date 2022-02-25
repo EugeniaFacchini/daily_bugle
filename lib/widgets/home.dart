@@ -17,11 +17,11 @@ class _HomeState extends State<Home> {
         title: Text('Daily Bugle'),
         centerTitle: true,
       ),
-       body: Center(
-         child: Container(
-          child: DropDownRegion() ,
+      body: Center(
+        child: Container(
+          child: DropDownRegion(),
         ),
-       ),
+      ),
     );
   }
 }
