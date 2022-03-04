@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:daily_bugle/widgets/dropdown_regione.dart';
+import 'package:daily_bugle/widgets/dropdown_province.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -9,8 +10,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  String? _regione = "";
-  String? _provincia = "";
+  String? _regione = null;
+  String? _provincia = null;
   @override
   Widget build(BuildContext context) {
     Color color = Theme.of(context).primaryColor;
@@ -70,13 +71,18 @@ class _HomeState extends State<Home> {
         titleSection,
         buttonSection,
         Container(
-          child: DropDownRegion(
-            onChange: (String? str) {
-              setState(() {
-                _regione = str;
-              });
-            },
-          ),
+          child: _regione == null
+              ? DropDownRegion(
+                  onChange: (String? str) {
+                    setState(() {
+                      _regione = str;
+                    });
+                  },
+                )
+              : DropDownProvince(
+                  regionName: _regione,
+                  onChange: (str) {},
+                ),
         ),
       ]),
     );
