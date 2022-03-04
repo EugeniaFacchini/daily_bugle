@@ -19,7 +19,6 @@ class _DropDownDemoState extends State<DropDownCategory> {
     "science",
     "sport",
     "technology"
-
   ].map<DropdownMenuItem<String>>((String value) {
     return DropdownMenuItem<String>(
       value: value,
@@ -28,15 +27,25 @@ class _DropDownDemoState extends State<DropDownCategory> {
   }).toList();
   @override
   Widget build(BuildContext context) {
-    return DropdownButton<String>(
-        value: _chosenValue,
-        //elevation: 5,
-        style: TextStyle(color: Colors.black),
-        items: A,
-        onChanged: (String? str){setState(() {
-          _chosenValue = str;
-          widget.onChange(str);
-        });}
-        );
+    return SizedBox(
+        width: 240,
+        child: DropdownButtonFormField<String>(
+            decoration: InputDecoration(
+              enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: const BorderSide(width: 3, color: Colors.blue)),
+            ),
+            dropdownColor: Colors.blue[200],
+            iconEnabledColor: Colors.red,
+            value: _chosenValue,
+            //elevation: 5,
+            style: TextStyle(color: Colors.black),
+            items: A,
+            onChanged: (String? str) {
+              setState(() {
+                _chosenValue = str;
+                widget.onChange(str);
+              });
+            }));
   }
 }

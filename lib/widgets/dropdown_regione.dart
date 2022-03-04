@@ -39,15 +39,23 @@ class _DropDownDemoState extends State<DropDownRegion> {
   }).toList();
   @override
   Widget build(BuildContext context) {
-    return DropdownButton<String>(
+    return DropdownButtonFormField<String>(
+        decoration: InputDecoration(
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide(width: 3, color: Colors.blue)),
+        ),
+        dropdownColor: Colors.blue[200],
+        iconEnabledColor: Colors.red,
         value: _chosenValue,
         //elevation: 5,
         style: TextStyle(color: Colors.black),
         items: A,
-        onChanged: (String? str){setState(() {
-          _chosenValue = str;
-          widget.onChange(str);
-        });}
-        );
+        onChanged: (String? str) {
+          setState(() {
+            _chosenValue = str;
+            widget.onChange(str);
+          });
+        });
   }
 }
