@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:daily_bugle/models/news_model.dart';
 import 'package:daily_bugle/widgets/news_list.dart';
-import 'package:daily_bugle/widgets/news_element.dart';
 
-class FavouriteScreen extends StatefulWidget {
+class NewsScreen extends StatefulWidget {
   final List<News> elements;
-  const FavouriteScreen({Key? key, required this.elements}) : super(key: key);
+  const NewsScreen({Key? key, required this.elements}) : super(key: key);
 
   @override
-  _FavouriteScreenState createState() => _FavouriteScreenState();
+  _NewsScreenState createState() => _NewsScreenState();
 }
 
-class _FavouriteScreenState extends State<FavouriteScreen> {
+class _NewsScreenState extends State<NewsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
