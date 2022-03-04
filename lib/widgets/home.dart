@@ -25,6 +25,9 @@ class _HomeState extends State<Home> {
   String? _regione = null;
   String? _provincia = null;
   String? _category = null;
+
+  final List<News> _list = [];
+
   @override
   Widget build(BuildContext context) {
     Color color = Theme.of(context).primaryColor;
@@ -69,61 +72,76 @@ class _HomeState extends State<Home> {
     );
 
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-          currentIndex: 0,
-          onTap: (index) {
-            if (index == 0) {
-              // naviga verso preferiti
-            }
-            if (index == 1) {
-              // naviga verso salvati
-            }
-            if (index == 2) {
-              // naviga verso immetti notizia
-            }
-          },
-          items: [
-            BottomNavigationBarItem(
-                icon: Icon(Icons.favorite), label: "PREFERITI"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.cloud_download), label: "SALVATI"),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.share), label: "IMMETTI NOTIZIA")
-          ]),
-      appBar: AppBar(
-        title: const Text('DAILY BUGLE'),
-        actions: [
-          Container(
-            width: 50,
-            child: Image.asset(
-              'web/icons/logo.png',
+        bottomNavigationBar: BottomNavigationBar(
+            currentIndex: 0,
+            onTap: (index) {
+              if (index == 0) {
+                // naviga verso preferiti
+              }
+              if (index == 1) {
+                // naviga verso salvati
+              }
+              if (index == 2) {
+                // naviga verso immetti notizia
+              }
+            },
+            items: [
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.favorite), label: "PREFERITI"),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.cloud_download), label: "SALVATI"),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.share), label: "IMMETTI NOTIZIA")
+            ]),
+        appBar: AppBar(
+          title: const Text('DAILY BUGLE'),
+          actions: [
+            Container(
+              width: 50,
+              child: Image.asset(
+                'web/icons/logo.png',
+              ),
             ),
-          ),
-        ],
-      ),
-      body: Column(children: [
-        titleSection,
-        Container(
-          child: _regione == null
-              ? DropDownRegion(
-                  onChange: (String? str) {
-                    setState(() {
-                      _regione = str;
-                    });
-                  },
-                )
-              : DropDownProvince(
-                  regionName: _regione,
-                  onChange: (str) {},
-                ),
+          ],
         ),
-        Container(child: DropDownCategory(onChange: (String? str) {
-          setState(() {
-            _category = str;
-          });
-        }))
-      ]),
-    );
+        body: Column(children: [
+          titleSection,
+          Container(
+            child: _regione == null
+                ? DropDownRegion(
+                    onChange: (String? str) {
+                      setState(() {
+                        _regione = str;
+                      });
+                    },
+                  )
+                : DropDownProvince(
+                    regionName: _regione,
+                    onChange: (str) {},
+                  ),
+          ),
+          Container(child: DropDownCategory(onChange: (String? str) {
+            setState(() {
+              _category = str;
+            });
+          }))
+        ]),
+        floatingActionButton: SizedBox(
+          child: FittedBox(
+            child: FloatingActionButton(
+                onPressed: () async {
+                  var res = await getNews();
+                  setState(() {
+                    _list.add(res);
+                  });
+                },
+                child: Icon(
+                  Icons.add,
+                )),
+          ),
+          height: 80,
+          width: 80,
+        ));
   }
 
   Column _buildButtonColumn(Color color, IconData icon, String label) {
