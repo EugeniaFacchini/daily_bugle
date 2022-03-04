@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:daily_bugle/models/news_model.dart';
-import 'package:daily_bugle/widgets/news.dart';
+import 'package:daily_bugle/widgets/news_list.dart';
 
 class FavouriteScreen extends StatefulWidget {
   final List<News> elements;
@@ -18,4 +18,3 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
         body: NewsList(elements: this.widget.elements, clickFavorite: (_) {}));
   }
 }
-

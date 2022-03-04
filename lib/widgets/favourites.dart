@@ -30,7 +30,7 @@ class _FavouriteState extends State<Favourite> {
         this.widget.click();
       },
       child: Icon(
-        Icons.favourite,
+        Icons.favorite,
         color: _isFavourite ? Colors.red : Colors.white,
       ),
     );
