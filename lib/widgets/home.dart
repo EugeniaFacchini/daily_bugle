@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:daily_bugle/widgets/dropdown_regione.dart';
 import 'package:daily_bugle/widgets/dropdown_province.dart';
 import 'package:daily_bugle/widgets/dropdown_category.dart';
+import 'package:daily_bugle/models/news_model.dart';
+import 'package:http/http.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -11,9 +15,16 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  Future<News> getNews() async {
+    var res = await get(Uri.parse(
+        ' https://newsapi.org/v2/top-headlines?q=$_provincia&category=$_category&apiKey=21fd58fd437247c9a0a37795f035b477'));
+    var data = jsonDecode(res.body);
+    return News.withId(news: data['content'], imageUrl: data['urlToImage']);
+  }
+
   String? _regione = null;
   String? _provincia = null;
-  String? _category=null;
+  String? _category = null;
   @override
   Widget build(BuildContext context) {
     Color color = Theme.of(context).primaryColor;
@@ -106,16 +117,11 @@ class _HomeState extends State<Home> {
                   onChange: (str) {},
                 ),
         ),
-        Container(
-          child:
-          DropDownCategory(
-            onChange: (String? str) {
-                    setState(() {
-                      _category = str;
-                    });
-            }
-          )
-        )
+        Container(child: DropDownCategory(onChange: (String? str) {
+          setState(() {
+            _category = str;
+          });
+        }))
       ]),
     );
   }
