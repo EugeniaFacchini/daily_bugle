@@ -16,14 +16,6 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     Color color = Theme.of(context).primaryColor;
 
-    Widget buttonSection = Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        _buildButtonColumn(color, Icons.favorite, 'PREFERITI'),
-        _buildButtonColumn(color, Icons.cloud_download, 'SALVATI'),
-        _buildButtonColumn(color, Icons.share, 'IMMETTI NOTIZIA'),
-      ],
-    );
     Widget titleSection = Container(
       padding: const EdgeInsets.all(32),
       child: Row(
@@ -55,7 +47,7 @@ class _HomeState extends State<Home> {
           /*3*/
           Icon(
             Icons.circle,
-            color: Colors.purple[500],
+            color: Colors.blue[500],
           ),
           const Text(
               '0'), //AL POSTO DELLO ZERO CI ANDRA' IL CONTATORE DELLE NEWS AGGIUNTE
@@ -64,12 +56,40 @@ class _HomeState extends State<Home> {
     );
 
     return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+          currentIndex: 0,
+          onTap: (index) {
+            if (index == 0) {
+              // naviga verso preferiti
+            }
+            if (index == 1) {
+              // naviga verso salvati
+            }
+            if (index == 2) {
+              // naviga verso immetti notizia
+            }
+          },
+          items: [
+            BottomNavigationBarItem(
+                icon: Icon(Icons.favorite), label: "PREFERITI"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.cloud_download), label: "SALVATI"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.share), label: "IMMETTI NOTIZIA")
+          ]),
       appBar: AppBar(
         title: const Text('DAILY BUGLE'),
+        actions: [
+          Container(
+            width: 50,
+            child: Image.asset(
+              'web/icons/logo.png',
+            ),
+          ),
+        ],
       ),
       body: Column(children: [
         titleSection,
-        buttonSection,
         Container(
           child: _regione == null
               ? DropDownRegion(
@@ -99,7 +119,7 @@ class _HomeState extends State<Home> {
           child: Text(
             label,
             style: TextStyle(
-              fontSize: 12,
+              fontSize: 15,
               fontWeight: FontWeight.w400,
               color: color,
             ),
