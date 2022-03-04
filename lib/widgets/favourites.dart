@@ -29,10 +29,10 @@ class _FavouriteState extends State<Favourite> {
 
         this.widget.click();
       },
-      child: Icon(
-        Icons.favourite,
-        color: _isFavourite ? Colors.red : Colors.white,
-      ),
+      // child: Icon(
+      //   Icons.favourite,
+      //   color: _isFavourite ? Colors.red : Colors.white,
+      // ),
     );
   }
 }

@@ -5,6 +5,7 @@ import 'package:daily_bugle/widgets/dropdown_regione.dart';
 import 'package:daily_bugle/widgets/dropdown_province.dart';
 import 'package:daily_bugle/widgets/dropdown_category.dart';
 import 'package:daily_bugle/models/news_model.dart';
+import 'package:daily_bugle/screens/news_screen.dart';
 import 'package:http/http.dart';
 
 class Home extends StatefulWidget {
@@ -15,18 +16,29 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  Future<News> getNews() async {
+  Future<List<News>> getNews() async {
     var res = await get(Uri.parse(
-        ' https://newsapi.org/v2/top-headlines?q=$_provincia&category=$_category&apiKey=21fd58fd437247c9a0a37795f035b477'));
+        'https://newsapi.org/v2/top-headlines?category=$_category&apiKey=21fd58fd437247c9a0a37795f035b477'));
     var data = jsonDecode(res.body);
-    return News.withId(news: data['content'], imageUrl: data['urlToImage']);
+    List<News> news = [];
+    for (var i = 0; i < data["articles"].length; i++) {
+      print(data["articles"][i]);
+      
+      if(data["articles"][i]['content']==null ||data["articles"][i]['urlToImage']==null)
+      {
+        continue;
+      }
+      News n = News.withId(news: data["articles"][i]['content'], imageUrl: data["articles"][i]['urlToImage']);
+      news.add(n);
+    }
+    return news;
   }
 
   String? _regione = null;
   String? _provincia = null;
   String? _category = null;
 
-  final List<News> _list = [];
+  List<News> _list = [];
 
   @override
   Widget build(BuildContext context) {
@@ -129,15 +141,16 @@ class _HomeState extends State<Home> {
         floatingActionButton: SizedBox(
           child: FittedBox(
             child: FloatingActionButton(
-                onPressed: () async {
-                  var res = await getNews();
-                  setState(() {
-                    _list.add(res);
-                  });
-                },
-                child: Icon(
-                  Icons.add,
-                )),
+              onPressed: () async {
+                var res = await getNews();
+                setState(() {
+                  _list = res;
+                });
+                Navigator.of(context).push(MaterialPageRoute(builder: (bc) {
+                  return NewsScreen(elements: _list);
+                }));
+              },
+            ),
           ),
           height: 80,
           width: 80,
