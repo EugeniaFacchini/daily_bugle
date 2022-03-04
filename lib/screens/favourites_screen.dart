@@ -19,4 +19,3 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
         body: NewsList(elements: this.widget.elements, clickFavorite: (_) {}));
   }
 }
-
