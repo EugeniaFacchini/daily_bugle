@@ -13,7 +13,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   String? _regione = null;
   String? _provincia = null;
-  String? _category=null;
+  String? _category = null;
   @override
   Widget build(BuildContext context) {
     Color color = Theme.of(context).primaryColor;
@@ -106,16 +106,11 @@ class _HomeState extends State<Home> {
                   onChange: (str) {},
                 ),
         ),
-        Container(
-          child:
-          DropDownCategory(
-            onChange: (String? str) {
-                    setState(() {
-                      _category = str;
-                    });
-            }
-          )
-        )
+        Container(child: DropDownCategory(onChange: (String? str) {
+          setState(() {
+            _category = str;
+          });
+        }))
       ]),
     );
   }
