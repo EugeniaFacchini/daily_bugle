@@ -1,0 +1,2 @@
+https://newsapi.org
+api key: 21fd58fd437247c9a0a37795f035b477
