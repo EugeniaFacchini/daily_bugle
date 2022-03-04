@@ -12,13 +12,13 @@ class _DropDownDemoState extends State<DropDownCategory> {
   String? _chosenValue = "";
   var A = [
     "",
-    "business",
-    "entertainement",
-    "general",
-    "health",
-    "science",
+    "Economia",
+    "spettacolo",
+    "notizie",
+    "salute",
+    "scienza",
     "sport",
-    "technology"
+    "tecnologia"
   ].map<DropdownMenuItem<String>>((String value) {
     return DropdownMenuItem<String>(
       value: value,

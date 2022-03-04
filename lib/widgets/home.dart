@@ -18,7 +18,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   Future<List<News>> getNews() async {
     var res = await get(Uri.parse(
-        'https://newsapi.org/v2/top-headlines?category=$_category&apiKey=21fd58fd437247c9a0a37795f035b477'));
+        'https://newsapi.org/v2/everything?q=$_provincia+$_category&language=it&apiKey=21fd58fd437247c9a0a37795f035b477'));
     var data = jsonDecode(res.body);
     List<News> news = [];
     for (var i = 0; i < data["articles"].length; i++) {
