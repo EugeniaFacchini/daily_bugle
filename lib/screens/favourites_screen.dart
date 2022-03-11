@@ -16,6 +16,16 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(),
-        body: NewsList(elements: this.widget.elements, clickFavorite: (_) {}));
+        body: NewsList(elements: this.widget.elements, clickFavorite: setFavoriteFlag)
+        );
+  }
+    void setFavoriteFlag(newsGuid) {
+    setState(() {
+      for (var item in this.widget.elements) {
+        if (item.id == newsGuid) {
+          item.isFavorite = !item.isFavorite!;
+        }
+      }
+    });
   }
 }

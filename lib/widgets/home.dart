@@ -6,6 +6,7 @@ import 'package:daily_bugle/widgets/dropdown_province.dart';
 import 'package:daily_bugle/widgets/dropdown_category.dart';
 import 'package:daily_bugle/models/news_model.dart';
 import 'package:daily_bugle/screens/news_screen.dart';
+import 'package:daily_bugle/screens/favourites_screen.dart';
 import 'package:http/http.dart';
 
 class Home extends StatefulWidget {
@@ -87,7 +88,13 @@ class _HomeState extends State<Home> {
             currentIndex: 0,
             onTap: (index) {
               if (index == 0) {
-                // naviga verso preferiti
+                
+                Navigator.of(context).push(MaterialPageRoute(builder: (bc) {
+                  return FavouriteScreen(
+                      elements: _list.where((x) => x.isFavorite!).toList());
+                }));
+                
+
               }
               if (index == 1) {
                 // naviga verso salvati
