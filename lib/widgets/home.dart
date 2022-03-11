@@ -67,7 +67,7 @@ class _HomeState extends State<Home> {
                 Text(
                   'News Italiane aggiunte oggi',
                   style: TextStyle(
-                    color: Colors.grey[500],
+                    color: Colors.white,
                   ),
                 ),
               ],
@@ -75,7 +75,7 @@ class _HomeState extends State<Home> {
           ),
           Icon(
             Icons.circle,
-            color: Colors.blue[500],
+            color: Colors.red[500],
           ),
           const Text(
               '0'), //AL POSTO DELLO ZERO CI ANDRA' IL CONTATORE DELLE NEWS AGGIUNTE
@@ -83,84 +83,93 @@ class _HomeState extends State<Home> {
       ),
     );
 
-    return Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-            currentIndex: 0,
-            onTap: (index) {
-              if (index == 0) {
-                
-                Navigator.of(context).push(MaterialPageRoute(builder: (bc) {
+    return Container(
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+        begin: Alignment.topRight,
+        end: Alignment.bottomLeft,
+        colors: [
+          Colors.blue,
+          Colors.red,
+        ],
+      )),
+      child: Scaffold(
+          backgroundColor: Colors.transparent,
+          bottomNavigationBar: BottomNavigationBar(
+              currentIndex: 0,
+              onTap: (index) {
+                if (index == 0) {
+                                  Navigator.of(context).push(MaterialPageRoute(builder: (bc) {
                   return FavouriteScreen(
                       elements: _list.where((x) => x.isFavorite!).toList());
                 }));
-                
-
-              }
-              if (index == 1) {
-                // naviga verso salvati
-              }
-              if (index == 2) {
-                // naviga verso immetti notizia
-              }
-            },
-            items: [
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.favorite), label: "PREFERITI"),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.cloud_download), label: "SALVATI"),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.share), label: "IMMETTI NOTIZIA")
-            ]),
-        appBar: AppBar(
-          title: const Text('DAILY BUGLE'),
-          actions: [
+                }
+                if (index == 1) {
+                  // naviga verso salvati
+                }
+                if (index == 2) {
+                  // naviga verso immetti notizia
+                }
+              },
+              items: [
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.favorite), label: "PREFERITI"),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.cloud_download), label: "SALVATI"),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.share), label: "IMMETTI NOTIZIA")
+              ]),
+          appBar: AppBar(
+            title: const Text('DAILY BUGLE'),
+            actions: [
+              Container(
+                width: 50,
+                child: Image.asset(
+                  'web/icons/logo.png',
+                ),
+              ),
+            ],
+          ),
+          body: Column(children: [
+            titleSection,
             Container(
-              width: 50,
-              child: Image.asset(
-                'web/icons/logo.png',
+              child: _regione == null
+                  ? DropDownRegion(
+                      onChange: (String? str) {
+                        setState(() {
+                          _regione = str;
+                        });
+                      },
+                    )
+                  : DropDownProvince(
+                      regionName: _regione,
+                      onChange: (str) {},
+                    ),
+            ),
+            Container(child: DropDownCategory(onChange: (String? str) {
+              setState(() {
+                _category = str;
+              });
+            }))
+          ]),
+          floatingActionButton: SizedBox(
+            child: FittedBox(
+              child: FloatingActionButton(
+                onPressed: () async {
+                  var res = await getNews();
+                  setState(() {
+                    _list = res;
+                  });
+                  Navigator.of(context).push(MaterialPageRoute(builder: (bc) {
+                    return NewsScreen(elements: _list);
+                  }));
+                },
               ),
             ),
-          ],
-        ),
-        body: Column(children: [
-          titleSection,
-          Container(
-            child: _regione == null
-                ? DropDownRegion(
-                    onChange: (String? str) {
-                      setState(() {
-                        _regione = str;
-                      });
-                    },
-                  )
-                : DropDownProvince(
-                    regionName: _regione,
-                    onChange: (str) {},
-                  ),
-          ),
-          Container(child: DropDownCategory(onChange: (String? str) {
-            setState(() {
-              _category = str;
-            });
-          }))
-        ]),
-        floatingActionButton: SizedBox(
-          child: FittedBox(
-            child: FloatingActionButton(
-              onPressed: () async {
-                var res = await getNews();
-                setState(() {
-                  _list = res;
-                });
-                Navigator.of(context).push(MaterialPageRoute(builder: (bc) {
-                  return NewsScreen(elements: _list);
-                }));
-              },
-            ),
-          ),
-          height: 80,
-          width: 80,
-        ));
+            height: 80,
+            width: 80,
+          )),
+    );
   }
 
   Column _buildButtonColumn(Color color, IconData icon, String label) {
