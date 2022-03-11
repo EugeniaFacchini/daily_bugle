@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:daily_bugle/widgets/dropdown_regione.dart';
@@ -118,7 +119,7 @@ class _HomeState extends State<Home> {
                 BottomNavigationBarItem(
                     icon: Icon(Icons.cloud_download), label: "SALVATI"),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.share), label: "IMMETTI NOTIZIA")
+                    icon: Icon(Icons.share), label: "CONDIVIDI")
               ]),
           appBar: AppBar(
             title: const Text('DAILY BUGLE'),
@@ -174,28 +175,30 @@ class _HomeState extends State<Home> {
               SizedBox(
                   height: 80,
                   width: 80,
-                  child: FittedBox(child: FloatingActionButton(
+                  child: FittedBox(
+                      child: FloatingActionButton(
                     onPressed: () {
                       Route route =
                           MaterialPageRoute(builder: (context) => const Home());
                       Navigator.push(context, route);
                     },
+                    child: Icon(Icons.arrow_back),
                   ))),
               SizedBox(
                 child: FittedBox(
                   child: FloatingActionButton(
-                    onPressed: () async {
-                      var res = await getNews();
-                      setState(() {
-                        _list = res;
-                      });
-                      Navigator.of(context)
-                          .push(MaterialPageRoute(builder: (bc) {
-                        return NewsScreen(
-                            elements: _list, clickFavorite: setFavoriteFlag);
-                      }));
-                    },
-                  ),
+                      onPressed: () async {
+                        var res = await getNews();
+                        setState(() {
+                          _list = res;
+                        });
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (bc) {
+                          return NewsScreen(
+                              elements: _list, clickFavorite: setFavoriteFlag);
+                        }));
+                      },
+                      child: Icon(Icons.add)),
                 ),
                 height: 80,
                 width: 80,
