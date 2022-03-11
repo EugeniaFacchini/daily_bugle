@@ -143,7 +143,11 @@ class _HomeState extends State<Home> {
                     )
                   : DropDownProvince(
                       regionName: _regione,
-                      onChange: (str) {},
+                      onChange: (str) {
+                          setState(() {
+                          _provincia = str;
+                        });
+                      },
                     ),
             ),
             Container(child: DropDownCategory(onChange: (String? str) {
