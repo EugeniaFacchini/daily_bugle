@@ -31,6 +31,7 @@ class _HomeState extends State<Home> {
       }
       News n = News.withId(
           news: data["articles"][i]['content'],
+          url: data["articles"][i]['url'],
           imageUrl: data["articles"][i]['urlToImage']);
       news.add(n);
     }
@@ -143,7 +144,11 @@ class _HomeState extends State<Home> {
                     )
                   : DropDownProvince(
                       regionName: _regione,
-                      onChange: (str) {},
+                      onChange: (str) {
+                        setState(() {
+                          _provincia = str;
+                        });
+                      },
                     ),
             ),
             Container(child: DropDownCategory(onChange: (String? str) {

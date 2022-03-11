@@ -5,6 +5,7 @@ class NewsElement extends StatelessWidget {
   final String news;
   final String imageUrl;
   final bool isFavorite;
+  final String url;
   final Function clickFavorite;
 
   const NewsElement(
@@ -12,6 +13,7 @@ class NewsElement extends StatelessWidget {
       required this.imageUrl,
       required this.news,
       required this.isFavorite,
+      required this.url,
       required this.clickFavorite})
       : super(key: key);
 
@@ -24,9 +26,17 @@ class NewsElement extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(20))),
-        child: Stack(
-          alignment: AlignmentDirectional.center,
+        child: Column(
+          //alignment: AlignmentDirectional.center,
           children: [
+            ListTile(
+              leading: Icon(Icons.arrow_drop_down_circle),
+              title: const Text('Link alla News'),
+              subtitle: Text(
+                url,
+                style: TextStyle(color: Colors.black.withOpacity(0.6)),
+              ),
+            ),
             Image.network(imageUrl, fit: BoxFit.cover),
             Positioned(
               child: SizedBox(
@@ -36,7 +46,7 @@ class NewsElement extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Colors.blueAccent),
+                      color: Colors.black),
                 ),
               ),
               bottom: 10,

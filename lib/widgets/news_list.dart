@@ -19,6 +19,7 @@ class NewsList extends StatelessWidget {
         key: Key(e.id!),
         imageUrl: e.imageUrl,
         news: e.news,
+        url:e.url,
         isFavorite: e.isFavorite ?? false,
         clickFavorite: (){
           this.clickFavorite(e.id!);
