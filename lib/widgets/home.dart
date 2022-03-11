@@ -99,10 +99,10 @@ class _HomeState extends State<Home> {
               currentIndex: 0,
               onTap: (index) {
                 if (index == 0) {
-                                  Navigator.of(context).push(MaterialPageRoute(builder: (bc) {
-                  return FavouriteScreen(
-                      elements: _list.where((x) => x.isFavorite!).toList());
-                }));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (bc) {
+                    return FavouriteScreen(
+                        elements: _list.where((x) => x.isFavorite!).toList());
+                  }));
                 }
                 if (index == 1) {
                   // naviga verso salvati
@@ -152,24 +152,51 @@ class _HomeState extends State<Home> {
               });
             }))
           ]),
-          floatingActionButton: SizedBox(
-            child: FittedBox(
-              child: FloatingActionButton(
-                onPressed: () async {
-                  var res = await getNews();
-                  setState(() {
-                    _list = res;
-                  });
-                  Navigator.of(context).push(MaterialPageRoute(builder: (bc) {
-                    return NewsScreen(elements: _list, clickFavorite: setFavoriteFlag);
-                  }));
-                },
+
+          // floatingActionButton: SizedBox(
+          //   child: FittedBox(
+          //     child: FloatingActionButton(
+          //       onPressed: () {
+          //        Route route = MaterialPageRoute(builder: (context) => const Home());
+          //         Navigator.push(context, route);
+          //     },)
+          //   ))
+
+          floatingActionButton: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              SizedBox(
+                  height: 80,
+                  width: 80,
+                  child: FittedBox(child: FloatingActionButton(
+                    onPressed: () {
+                      Route route =
+                          MaterialPageRoute(builder: (context) => const Home());
+                      Navigator.push(context, route);
+                    },
+                  ))),
+              SizedBox(
+                child: FittedBox(
+                  child: FloatingActionButton(
+                    onPressed: () async {
+                      var res = await getNews();
+                      setState(() {
+                        _list = res;
+                      });
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (bc) {
+                        return NewsScreen(
+                            elements: _list, clickFavorite: setFavoriteFlag);
+                      }));
+                    },
+                  ),
+                ),
+                height: 80,
+                width: 80,
               ),
-            ),
-            height: 80,
-            width: 80,
+            ],
           )),
-          
     );
   }
 
@@ -205,3 +232,10 @@ class _HomeState extends State<Home> {
   }
 }
 //ma che bel commento parte due
+
+          //new RaisedButton(
+            //onPressed: () {
+             // Route route = MaterialPageRoute(builder: (context) => const Home());
+              //Navigator.push(context, route);
+            //},
+          //),
