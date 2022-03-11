@@ -52,14 +52,14 @@ class NewsElement extends StatelessWidget {
               bottom: 10,
               left: 10,
             ),
-            Positioned(
+            SizedBox(
               child: Favourite(
                 click: this.clickFavorite,
                 isFavourite: this.isFavorite,
               ),
-              top: 10,
-              right: 10,
-            )
+              height:50,
+              width:50,
+            ),
           ],
         ),
       ),

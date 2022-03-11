@@ -31,7 +31,7 @@ class _FavouriteState extends State<Favourite> {
       },
       child: Icon(
         Icons.favorite,
-        color: _isFavourite ? Colors.red : Colors.white,
+        color: _isFavourite ? Colors.red : Colors.blue,
       ),
     );
   }
