@@ -161,7 +161,7 @@ class _HomeState extends State<Home> {
                     _list = res;
                   });
                   Navigator.of(context).push(MaterialPageRoute(builder: (bc) {
-                    return NewsScreen(elements: _list);
+                    return NewsScreen(elements: _list, clickFavorite: setFavoriteFlag);
                   }));
                 },
               ),
@@ -169,7 +169,18 @@ class _HomeState extends State<Home> {
             height: 80,
             width: 80,
           )),
+          
     );
+  }
+
+  void setFavoriteFlag(newsGuid) {
+    setState(() {
+      for (var item in _list) {
+        if (item.id == newsGuid) {
+          item.isFavorite = !item.isFavorite!;
+        }
+      }
+    });
   }
 
   Column _buildButtonColumn(Color color, IconData icon, String label) {

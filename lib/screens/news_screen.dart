@@ -4,7 +4,9 @@ import 'package:daily_bugle/widgets/news_list.dart';
 
 class NewsScreen extends StatefulWidget {
   final List<News> elements;
-  const NewsScreen({Key? key, required this.elements}) : super(key: key);
+  final dynamic  clickFavorite;
+  
+  const NewsScreen({Key? key, required this.elements,required this.clickFavorite}) : super(key: key);
 
   @override
   _NewsScreenState createState() => _NewsScreenState();
@@ -15,6 +17,8 @@ class _NewsScreenState extends State<NewsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(),
-        body: NewsList(elements: this.widget.elements, clickFavorite: (_) {}));
+        body: NewsList(elements: widget.elements, clickFavorite: widget.clickFavorite));
   }
 }
+
+

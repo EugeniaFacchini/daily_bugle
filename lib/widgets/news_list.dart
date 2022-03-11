@@ -4,7 +4,7 @@ import 'package:daily_bugle/widgets/news_element.dart';
 
 class NewsList extends StatelessWidget {
   final List<News> elements;
-  final void Function(String picQuoteGuid) clickFavorite;
+  final Function(String newsGuid) clickFavorite;
   
   const NewsList({Key? key, required this.elements, required this.clickFavorite})
       : super(key: key);
