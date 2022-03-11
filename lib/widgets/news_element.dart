@@ -46,7 +46,7 @@ class NewsElement extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
-                      color: Colors.blueAccent),
+                      color: Colors.black),
                 ),
               ),
               bottom: 10,
