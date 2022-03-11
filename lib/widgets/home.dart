@@ -8,6 +8,7 @@ import 'package:daily_bugle/widgets/dropdown_category.dart';
 import 'package:daily_bugle/models/news_model.dart';
 import 'package:daily_bugle/screens/news_screen.dart';
 import 'package:daily_bugle/screens/favourites_screen.dart';
+import 'package:daily_bugle/screens/saved_screen.dart';
 import 'package:http/http.dart';
 
 class Home extends StatefulWidget {
@@ -107,7 +108,9 @@ class _HomeState extends State<Home> {
                   }));
                 }
                 if (index == 1) {
-                  // naviga verso salvati
+                  Navigator.of(context).push(MaterialPageRoute(builder: (bc) {
+                    return SavedScreen();
+                  }));
                 }
                 if (index == 2) {
                   // naviga verso immetti notizia
@@ -195,7 +198,7 @@ class _HomeState extends State<Home> {
                         Navigator.of(context)
                             .push(MaterialPageRoute(builder: (bc) {
                           return NewsScreen(
-                              elements: _list, clickFavorite: setFavoriteFlag);
+                              elements: _list, clickFavorite: setFavoriteFlag, province: _provincia);
                         }));
                       },
                       child: Icon(Icons.add)),
