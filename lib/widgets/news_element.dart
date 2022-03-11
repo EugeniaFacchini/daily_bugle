@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:pics_quotes/widgets/favorite.dart';
+import 'package:daily_bugle/widgets/favourites.dart';
 
 class NewsElement extends StatelessWidget {
   final String news;
@@ -42,14 +42,14 @@ class NewsElement extends StatelessWidget {
               bottom: 10,
               left: 10,
             ),
-            // Positioned(
-            //   child: Favorite(
-            //     click: this.clickFavorite,
-            //     isFavorite: this.isFavorite,
-            //   ),
-            //   top: 10,
-            //   right: 10,
-            // )
+            Positioned(
+              child: Favourite(
+                click: this.clickFavorite,
+                isFavourite: this.isFavorite,
+              ),
+              top: 10,
+              right: 10,
+            )
           ],
         ),
       ),
